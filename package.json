@@ -1,0 +1,27 @@
+{
+  "name": "welcome-hsb-back",
+  "version": "1.0.0",
+  "description": "backend of a schools project",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ElenjaM/welcome-hsb-back.git"
+  },
+  "keywords": [
+    "school",
+    "guidance",
+    "system"
+  ],
+  "author": "ElenjaM",
+  "license": "CC-BY-NC-3.0-DE",
+  "bugs": {
+    "url": "https://github.com/ElenjaM/welcome-hsb-back/issues"
+  },
+  "homepage": "https://github.com/ElenjaM/welcome-hsb-back#readme",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
