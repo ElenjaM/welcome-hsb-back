@@ -1,39 +1,15 @@
-const app=require('./server');
-const datenbank=require('./services(DB)/DB_connection')
+const Hochschulangehoerige = require('./models/hochschulangehoerige');
 
-
-app.get('/hochschulangehoerige', (req,res) =>{
-   
-    datenbank.query('SELECT * FROM hochschulangehoerige', (err,result) =>{
-        if (err){
-            res.json("Error");
-        }
-            res.json(result);
-    })
-         
-    });
-
-    //neue hochschulangehoerige hinzufügen
-const new_hochschulangehoerige = { name: "Uta Bonhebeck", email: "uta.bonhebeck@hs-bremen.de", Organisationsbereich_idOrganisationsbereich:8};
-/*app.post('/hochschulangehoerige',(req,res)=>{
-
-    datenbank.query('INSERT INTO hochschulangehoerige SET ?', new_hochschulangehoerige, (err, result)=>{
-        if (err) {
-         res.json("Error in Eingabe");
-        }
-        res.json("Frau Prof Uta erfolgreich hinzugefügt mit ID: ", result);
-    })
-});*/
-
-//der Hochschulangehoerige von Id 23 entfernen
-/*app.delete('/hochschulangehoerige',(req,res)=>{
-    datenbank.query('DELETE FROM hochschulangehoerige WHERE idHochschulangehoerige=23',(err, result)=>{
-        if (err){
-            res.json("Error");
-        }
-            res.json("erfolgreich entfern: ", result);
-    })
-});*/
-
-
-     
+//beispielhaft
+module.exports = (app) => {
+  app.get('/hochschulangehoerige', async (req, res) => {
+    try {
+      const daten = await Hochschulangehoerige.find();
+      console.log('Hochschulangehörige aus MongoDB:', daten); 
+      res.send('Daten wurden im Terminal ausgegeben.');
+    } catch (err) {
+      console.error('Fehler beim Abrufen:', err);
+      res.status(500).send('Fehler beim Abrufen der Daten');
+    }
+  });
+};

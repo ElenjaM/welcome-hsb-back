@@ -1,12 +1,21 @@
-const express =require('express');
-const app =express() ;
-const port= 5000;
- 
+require('dotenv').config();
+const express = require('express');
+const connectMongo = require('./db-mongo');
+const routes = require('./app'); // Nur EINMAL einbinden
+
+const app = express();
+const port = process.env.PORT || 5000;
+
 app.use(express.json());
 
-app.listen(port, () => {
-    console.log(`Der Server läuft auf http://localhost:${port}`);
+// MongoDB verbinden und Server starten
+connectMongo().then(() => {
+  app.listen(port, () => {
+    console.log(`Server läuft auf http://localhost:${port}`);
   });
-  
 
- module.exports=app;
+  // Routen initialisieren, nachdem DB verbunden ist
+  routes(app);
+});
+
+module.exports=app;
