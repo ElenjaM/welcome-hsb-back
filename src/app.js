@@ -1,39 +1,38 @@
-const app=require('./server');
-const datenbank=require('./services(DB)/DB_connection')
+/**
+ * @file app.js
+ * @description Definiert die Routen für den Zugriff auf die MongoDB-Daten (z. B. Hochschulangehörige).
+ *              Wird nach erfolgreicher Verbindung zur Datenbank vom Server eingebunden.
+ * 
+ * @author Kevin Jancen
+ * @date 15.05.2025
+ * @module app
+ */
 
+const Hochschulangehoerige = require('./models/hochschulangehoerige');
 
-app.get('/hochschulangehoerige', (req,res) =>{
-   
-    datenbank.query('SELECT * FROM hochschulangehoerige', (err,result) =>{
-        if (err){
-            res.json("Error");
-        }
-            res.json(result);
-    })
-         
-    });
-
-    //neue hochschulangehoerige hinzufügen
-const new_hochschulangehoerige = { name: "Uta Bonhebeck", email: "uta.bonhebeck@hs-bremen.de", Organisationsbereich_idOrganisationsbereich:8};
-/*app.post('/hochschulangehoerige',(req,res)=>{
-
-    datenbank.query('INSERT INTO hochschulangehoerige SET ?', new_hochschulangehoerige, (err, result)=>{
-        if (err) {
-         res.json("Error in Eingabe");
-        }
-        res.json("Frau Prof Uta erfolgreich hinzugefügt mit ID: ", result);
-    })
-});*/
-
-//der Hochschulangehoerige von Id 23 entfernen
-/*app.delete('/hochschulangehoerige',(req,res)=>{
-    datenbank.query('DELETE FROM hochschulangehoerige WHERE idHochschulangehoerige=23',(err, result)=>{
-        if (err){
-            res.json("Error");
-        }
-            res.json("erfolgreich entfern: ", result);
-    })
-});*/
-
-
-     
+/**
+ * Initialisiert die API-Routen für die Express-Anwendung.
+ * 
+ * @param {import('express').Express} app - Die Express-Anwendung
+ */
+module.exports = (app) => {
+  /**
+   * Route: GET /hochschulangehoerige
+   * 
+   * Beschreibung:
+   * Ruft alle Hochschulangehörigen aus der MongoDB-Datenbank ab
+   * und gibt sie als JSON im Browser zurück. Die Daten werden zusätzlich im Terminal ausgegeben.
+   * 
+   * Beispielaufruf: GET http://localhost:5000/hochschulangehoerige
+   */
+  app.get('/hochschulangehoerige', async (req, res) => {
+    try {
+      const daten = await Hochschulangehoerige.find(); // Alle Einträge der Collection holen
+      console.log('Hochschulangehörige aus MongoDB:', daten); 
+      res.json(daten); // Als JSON an den Client zurückgeben
+    } catch (err) {
+      console.error('Fehler beim Abrufen:', err);
+      res.status(500).send('Fehler beim Abrufen der Daten');
+    }
+  });
+};
