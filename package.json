@@ -4,7 +4,8 @@
   "description": "backend of a schools project",
   "main": "index.js",
   "scripts": {
-    "start": "node src/app.js"
+    "start-MySQL": "node MySQL/app.js",
+    "start-Mongo": "node src/server.js"
   },
   "repository": {
     "type": "git",

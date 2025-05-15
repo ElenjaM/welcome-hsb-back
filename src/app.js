@@ -6,7 +6,8 @@ module.exports = (app) => {
     try {
       const daten = await Hochschulangehoerige.find();
       console.log('Hochschulangehörige aus MongoDB:', daten); 
-      res.send('Daten wurden im Terminal ausgegeben.');
+      //res.send('Daten wurden im Terminal ausgegeben.'); //testweise im Terminal ausgeben 
+      res.json(daten);
     } catch (err) {
       console.error('Fehler beim Abrufen:', err);
       res.status(500).send('Fehler beim Abrufen der Daten');
