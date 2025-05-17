@@ -4,7 +4,7 @@ const mysql = require('mysql2');
 const datenbank= mysql.createConnection({
     host: 'localhost',
     user:'root',
-    password:'123',
+    password:'mySQLBDD29&.',
     database: 'welcome@hsb',
 });
 
