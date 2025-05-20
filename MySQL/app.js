@@ -13,6 +13,22 @@ app.use('/api/veranstaltung', veranstaltungRoutes);
 const gebaeudeRoutes = require('./routes/gebaeude.routes');
 app.use('/api/gebaeude', gebaeudeRoutes);
 
+// Raum-Routen laden
+const raumRoutes = require('./routes/raum.routes');
+app.use('/api/raum', raumRoutes);
+
+// Hochschulangehoerige-Routen laden
+const hochschulangehoerigeRoutes = require('./routes/hochschulangehoerige.routes');
+app.use('/api/hochschulangehoerige', hochschulangehoerigeRoutes);
+
+//organisationsbereich-Routen laden
+const organisationsbereichRoutes = require('./routes/organisationsbereich.routes');
+app.use('/api/organisationsbereich', organisationsbereichRoutes);
+
+// Raumnutzung-Routen laden
+const raumnutzungRoutes = require('./routes/raumnutzung.routes');
+app.use('/api/raumnutzung', raumnutzungRoutes);
+
 
 app.get('/hochschulangehoerige', (req,res) =>{
    
