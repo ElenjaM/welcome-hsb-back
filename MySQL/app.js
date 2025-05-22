@@ -1,5 +1,33 @@
-const app=require('./server');
-const datenbank=require('./services(DB)/DB_connection')
+const app = require('./server');
+const datenbank = require('./services(DB)/DB_connection');
+
+// Benutzer-Routen laden
+const benutzerRoutes = require('./routes/benutzer.routes');
+app.use('/api/benutzer', benutzerRoutes);
+
+// Veranstalung-Routen laden
+const veranstaltungRoutes = require('./routes/veranstaltung.route');
+app.use('/api/veranstaltung', veranstaltungRoutes);
+
+// Gebaeude-Routen laden
+const gebaeudeRoutes = require('./routes/gebaeude.routes');
+app.use('/api/gebaeude', gebaeudeRoutes);
+
+// Raum-Routen laden
+const raumRoutes = require('./routes/raum.routes');
+app.use('/api/raum', raumRoutes);
+
+// Hochschulangehoerige-Routen laden
+const hochschulangehoerigeRoutes = require('./routes/hochschulangehoerige.routes');
+app.use('/api/hochschulangehoerige', hochschulangehoerigeRoutes);
+
+//organisationsbereich-Routen laden
+const organisationsbereichRoutes = require('./routes/organisationsbereich.routes');
+app.use('/api/organisationsbereich', organisationsbereichRoutes);
+
+// Raumnutzung-Routen laden
+const raumnutzungRoutes = require('./routes/raumnutzung.routes');
+app.use('/api/raumnutzung', raumnutzungRoutes);
 
 
 app.get('/hochschulangehoerige', (req,res) =>{
